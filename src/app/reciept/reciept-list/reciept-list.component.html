@@ -1,2 +1,4 @@
-<!-- <app-reciept-item [reciept-list]="reciepts"></app-reciept-item> -->
-<app-reciept-item message="Welcome To Item"></app-reciept-item>
+<app-reciept-item
+  *ngFor="let reciept of reciepts"
+  [reciept-item]="reciept"
+></app-reciept-item>
