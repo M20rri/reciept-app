@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IReciept } from '../../reciept.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,8 +12,11 @@ import { CommonModule } from '@angular/common';
 })
 export class RecieptItemComponent implements OnInit {
   @Input({ alias: 'reciept-item', required: true }) reciept: IReciept;
+  @Output() recieptEvent: EventEmitter<IReciept> = new EventEmitter();
   constructor() {}
-  ngOnInit(): void {
-    console.log('reciept', this.reciept);
-  }
+  ngOnInit(): void {}
+
+  onSelect = () => {
+    this.recieptEvent.emit(this.reciept);
+  };
 }

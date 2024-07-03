@@ -1,10 +1,17 @@
 <div class="container mt-3">
   <div class="row">
-    <div class="col">
-      <app-reciept-list></app-reciept-list>
+    <div class="col-9">
+      <app-reciept-list (recieptInvoker)="item = $event"></app-reciept-list>
     </div>
-    <div class="col">
-      <app-reciept-detail></app-reciept-detail>
+    <div class="col-3">
+      <ng-container *ngIf="item; else elseTemplate">
+        <app-reciept-detail [currentReciept]="item"></app-reciept-detail>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <p class="text-danger">
+          Oh snap! <strong>please select reciept</strong>.
+        </p>
+      </ng-template>
     </div>
   </div>
 </div>

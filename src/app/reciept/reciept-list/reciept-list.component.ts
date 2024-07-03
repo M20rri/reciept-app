@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RecieptItemComponent } from './reciept-item/reciept-item.component';
 import { IReciept } from '../reciept.model';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
   imports: [RecieptItemComponent, FormsModule, CommonModule],
 })
 export class RecieptListComponent {
+  @Output() recieptInvoker: EventEmitter<IReciept> = new EventEmitter();
+
   public reciepts: Array<IReciept> = [
     {
       id: 1,
@@ -44,4 +46,9 @@ export class RecieptListComponent {
       imageUrl: 'https://fakeimg.pl/300x200/?text=Sample5',
     },
   ];
+
+  recieptConsume = (evt: IReciept) => {
+    console.log('reciept Consumer', evt);
+    this.recieptInvoker.emit(evt);
+  };
 }
